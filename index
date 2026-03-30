@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LFA Curve Analyzer</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -562,173 +560,42 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
 
 /* ── PRINT STYLES ── */
 @media print {
-  @page {
-    size: A4 portrait;
-    margin: 18mm 16mm 16mm 16mm;
-  }
-
+  @page { size: A4 portrait; margin: 18mm 16mm 16mm 16mm; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-
-  body {
-    background: #fff !important;
-    color: #000 !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    min-height: unset;
-  }
-
-  /* Hide everything except the print report wrapper */
-  header, .top-panel, .empty-state, .method-note,
-  .btn, .add-row-btn, .tbl-footer, #emptyState {
-    display: none !important;
-  }
-
-  .main-area {
-    padding: 0 !important;
-    gap: 0 !important;
-    background: #fff !important;
-  }
-
+  body { background: #fff !important; color: #000 !important; font-family: 'Inter', sans-serif; font-size: 11px; min-height: unset; }
+  header, .top-panel, .empty-state, .method-note, .btn, .add-row-btn, .tbl-footer, #emptyState { display: none !important; }
+  .main-area { padding: 0 !important; gap: 0 !important; background: #fff !important; }
   #results { display: block !important; }
   .hidden { display: block !important; }
-
-  /* Print report wrapper */
-  .print-report {
-    display: block !important;
-    background: #fff;
-    padding: 0;
-  }
-
-  .no-print { display: none !important; }
-
-  /* Print header */
-  .print-header {
-    display: flex !important;
-    align-items: flex-start;
-    justify-content: space-between;
-    border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-    margin-bottom: 16px;
-  }
-  .print-header-left {}
-  .print-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #000;
-    letter-spacing: -0.01em;
-    margin-bottom: 2px;
-  }
-  .print-subtitle {
-    font-size: 10px;
-    color: #555;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .print-meta {
-    text-align: right;
-    font-size: 9.5px;
-    color: #555;
-    font-family: 'JetBrains Mono', monospace;
-    line-height: 1.7;
-  }
-
-  /* Card reset */
-  .combined-card {
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-  }
-
-  .card-header {
-    border-bottom: 1px solid #ccc !important;
-    padding: 0 0 8px !important;
-    margin-bottom: 0;
-  }
+  .print-header { display: flex !important; align-items: flex-start; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 16px; }
+  .print-title { font-size: 17px; font-weight: 700; color: #000; letter-spacing: -0.01em; margin-bottom: 2px; }
+  .print-subtitle { font-size: 10px; color: #555; font-family: 'JetBrains Mono', monospace; }
+  .print-meta { text-align: right; font-size: 9.5px; color: #555; font-family: 'JetBrains Mono', monospace; line-height: 1.7; }
+  .combined-card { border: none !important; box-shadow: none !important; border-radius: 0 !important; }
+  .card-header { border-bottom: 1px solid #ccc !important; padding: 0 0 8px !important; }
   .card-title { font-size: 13px !important; color: #000 !important; font-weight: 700 !important; }
   .card-sub { font-size: 10px !important; color: #555 !important; }
-  .badge {
-    border: 1px solid #999 !important;
-    background: #f4f4f4 !important;
-    color: #000 !important;
-    font-size: 9px !important;
-  }
-
-  /* Params bar */
+  .badge { border: 1px solid #999 !important; background: #f4f4f4 !important; color: #000 !important; font-size: 9px !important; }
   .params-bar { margin-bottom: 8px !important; gap: 4px !important; }
-  .param-chip {
-    background: #f4f4f4 !important;
-    border: 1px solid #ccc !important;
-    color: #000 !important;
-    font-size: 10px !important;
-    padding: 3px 8px !important;
-  }
+  .param-chip { background: #f4f4f4 !important; border: 1px solid #ccc !important; color: #000 !important; font-size: 10px !important; padding: 3px 8px !important; }
   .param-chip span { color: #000 !important; font-weight: 700 !important; }
-
-  /* Chart sections */
-  .chart-section {
-    border-bottom: 1px solid #e0e0e0 !important;
-    padding: 12px 0 !important;
-    page-break-inside: avoid;
-  }
-  .chart-section-label {
-    font-size: 10px !important;
-    color: #000 !important;
-    letter-spacing: 0.09em;
-    margin-bottom: 6px !important;
-  }
+  .chart-section { border-bottom: 1px solid #e0e0e0 !important; padding: 12px 0 !important; page-break-inside: avoid; }
+  .chart-section-label { font-size: 10px !important; color: #000 !important; letter-spacing: 0.09em; margin-bottom: 6px !important; }
   .chart-section-label::after { background: #ccc !important; }
-  .chart-section-label .r2 {
-    background: #f4f4f4 !important;
-    border: 1px solid #ccc !important;
-    color: #000 !important;
-    font-size: 9px !important;
-  }
-
+  .chart-section-label .r2 { background: #f4f4f4 !important; border: 1px solid #ccc !important; color: #000 !important; font-size: 9px !important; }
   .chart-wrap { height: 230px !important; }
   .chart-wrap.prec { height: 170px !important; }
-
-  /* Precision legend */
-  .prec-legend {
-    font-size: 10px !important;
-    color: #333 !important;
-    margin-top: 6px !important;
-    gap: 10px !important;
-  }
-  .pl-dot { background: #555 !important; }
-
-  /* Limits section */
+  .prec-legend { font-size: 10px !important; color: #333 !important; margin-top: 6px !important; gap: 10px !important; }
   .limits-section { padding: 12px 0 16px !important; page-break-inside: avoid; }
-  .limits-title {
-    font-size: 10px !important;
-    color: #000 !important;
-    margin-bottom: 8px !important;
-  }
+  .limits-title { font-size: 10px !important; color: #000 !important; margin-bottom: 8px !important; }
   .limits-title::after { background: #ccc !important; }
-
   .limits-row { gap: 6px !important; }
-  .lim-card {
-    border: 1px solid #bbb !important;
-    background: #f8f8f8 !important;
-    color: #000 !important;
-    padding: 8px 10px !important;
-    min-width: 90px !important;
-  }
+  .lim-card { border: 1px solid #bbb !important; background: #f8f8f8 !important; color: #000 !important; padding: 8px 10px !important; min-width: 90px !important; }
   .lim-acronym { color: #000 !important; font-size: 10px !important; }
   .lim-val { color: #000 !important; font-size: 16px !important; }
   .lim-unit { color: #444 !important; }
   .lim-desc { color: #555 !important; }
-
-  /* Print footer note */
-  .print-footer-note {
-    display: block !important;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: #666;
-    line-height: 1.7;
-    border-top: 1px solid #ddd;
-    padding-top: 8px;
-    margin-top: 4px;
-  }
-  .method-note { display: none !important; }
+  .print-footer-note { display: block !important; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #666; line-height: 1.7; border-top: 1px solid #ddd; padding-top: 8px; margin-top: 4px; }
 }
 </style>
 </head>
@@ -916,7 +783,6 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
   </div>
 
   <div id="results" class="hidden">
-    <!-- Print-only header (hidden on screen, shown in print) -->
     <div class="print-header" style="display:none">
       <div class="print-header-left">
         <div class="print-title">LFA Performance Analysis Report</div>
@@ -924,7 +790,6 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
       </div>
       <div class="print-meta" id="printMeta"></div>
     </div>
-
     <div class="combined-card">
       <div class="card-header">
         <div>
@@ -967,13 +832,13 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
       </div>
 
       <div class="method-note" id="methodNote"></div>
-
-      <!-- Print-only footer note -->
       <div class="print-footer-note" id="printFooterNote" style="display:none"></div>
     </div>
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 // ═══════════════════════════════════════
 // STATE
@@ -1729,24 +1594,16 @@ function processFile(file){
 // PRINT REPORT
 // ═══════════════════════════════════════
 function printReport() {
-  // Populate print meta
   const metricLabel = metric === 'signal' ? 'Signal (AU)' : 'T/C Ratio';
   const modelLabel = document.getElementById('fitBadge').textContent;
   const r2Label = document.getElementById('r2Badge').textContent;
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
   const timeStr = now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('printSubtitle').textContent = `${metricLabel} · ${modelLabel} Fit · ${r2Label}`;
+  document.getElementById('printMeta').innerHTML = `LFA·ANALYZER<br>Generated: ${dateStr} ${timeStr}<br>Method: CLSI EP17-A2`;
+  document.getElementById('printFooterNote').textContent = document.getElementById('methodNote').textContent;
 
-  document.getElementById('printSubtitle').textContent =
-    `${metricLabel} · ${modelLabel} Fit · ${r2Label}`;
-  document.getElementById('printMeta').innerHTML =
-    `LFA·ANALYZER<br>Generated: ${dateStr} ${timeStr}<br>Method: CLSI EP17-A2`;
-
-  // Mirror method note to print footer
-  document.getElementById('printFooterNote').textContent =
-    document.getElementById('methodNote').textContent;
-
-  // Temporarily re-render charts in grayscale-friendly colors
   const bwChart = (inst, datasetColors) => {
     if (!inst) return;
     inst.data.datasets.forEach((ds, i) => {
@@ -1756,35 +1613,18 @@ function printReport() {
       ds._origPointBackgroundColor = ds.pointBackgroundColor;
       Object.assign(ds, datasetColors[i] || {});
     });
-    inst.options._origGridColorX = inst.options.scales?.x?.grid?.color;
-    inst.options._origGridColorY = inst.options.scales?.y?.grid?.color;
-    if (inst.options.scales?.x?.grid) inst.options.scales.x.grid.color = '#ddd';
-    if (inst.options.scales?.y?.grid) {
-      const orig = inst.options.scales.y.grid.color;
-      inst.options.scales.y.grid.color = typeof orig === 'function'
-        ? ctx => '#ddd'
-        : '#ddd';
-    }
+    if (inst.options.scales?.x?.grid) { inst.options._origGridColorX = inst.options.scales.x.grid.color; inst.options.scales.x.grid.color = '#ddd'; }
+    if (inst.options.scales?.y?.grid) { inst.options._origGridColorY = inst.options.scales.y.grid.color; inst.options.scales.y.grid.color = '#ddd'; }
     inst.update('none');
   };
-
-  // Standard curve: dark line, grey points
-  bwChart(stdChartInst, [
-    { borderColor:'#111', backgroundColor:'rgba(0,0,0,0.04)',
-      pointBackgroundColor:'#222', pointBorderColor:'#000' }, // fitted line (if any)
-  ]);
-
-  // Precision profile
-  bwChart(precChartInst, [
-    { borderColor:'#333', backgroundColor:'rgba(0,0,0,0.04)',
-      pointBackgroundColor: precChartInst?.data?.datasets?.[0]?.pointBackgroundColor?.map?.(()=>'#555') || '#555',
-      pointBorderColor: precChartInst?.data?.datasets?.[0]?.pointBorderColor?.map?.(()=>'#333') || '#333' }
-  ]);
+  bwChart(stdChartInst, [{ borderColor:'#111', backgroundColor:'rgba(0,0,0,0.04)', pointBackgroundColor:'#222', pointBorderColor:'#000' }]);
+  bwChart(precChartInst, [{ borderColor:'#333', backgroundColor:'rgba(0,0,0,0.04)',
+    pointBackgroundColor: precChartInst?.data?.datasets?.[0]?.pointBackgroundColor?.map?.(()=>'#555') || '#555',
+    pointBorderColor: precChartInst?.data?.datasets?.[0]?.pointBorderColor?.map?.(()=>'#333') || '#333' }]);
 
   window.print();
 
-  // Restore after print dialog
-  const restore = () => {
+  window.addEventListener('afterprint', () => {
     [stdChartInst, precChartInst].forEach(inst => {
       if (!inst) return;
       inst.data.datasets.forEach(ds => {
@@ -1793,22 +1633,24 @@ function printReport() {
         if (ds._origPointBorderColor !== undefined) ds.pointBorderColor = ds._origPointBorderColor;
         if (ds._origPointBackgroundColor !== undefined) ds.pointBackgroundColor = ds._origPointBackgroundColor;
       });
-      if (inst.options.scales?.x?.grid && inst.options._origGridColorX !== undefined)
-        inst.options.scales.x.grid.color = inst.options._origGridColorX;
-      if (inst.options.scales?.y?.grid && inst.options._origGridColorY !== undefined)
-        inst.options.scales.y.grid.color = inst.options._origGridColorY;
+      if (inst.options.scales?.x?.grid && inst.options._origGridColorX !== undefined) inst.options.scales.x.grid.color = inst.options._origGridColorX;
+      if (inst.options.scales?.y?.grid && inst.options._origGridColorY !== undefined) inst.options.scales.y.grid.color = inst.options._origGridColorY;
       inst.update('none');
     });
-  };
-
-  // Use afterprint event for reliable restore
-  window.addEventListener('afterprint', restore, { once: true });
+  }, { once: true });
 }
 
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
 window.onload=()=>{
+  // Guard: if Chart.js didn't load, show a visible error instead of silent blank
+  if (typeof Chart === 'undefined') {
+    document.body.innerHTML = '<div style="font-family:sans-serif;padding:40px;color:#b91c1c;">' +
+      '<strong>Failed to load Chart.js.</strong> Check your internet connection or browser content policy.' +
+      '</div>';
+    return;
+  }
   // Polyfill roundRect for older Chrome/Safari
   if (!CanvasRenderingContext2D.prototype.roundRect) {
     CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
