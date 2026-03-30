@@ -547,6 +547,189 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 .hidden { display: none !important; }
 #csvFileInput { display: none; }
+
+/* ── PRINT BUTTON ── */
+.btn-print {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text2);
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.btn-print:hover { border-color: var(--text2); color: var(--text); background: var(--surface2); }
+#printBtn { display: none; }
+#printBtn.visible { display: flex; }
+
+/* ── PRINT STYLES ── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 16mm 16mm;
+  }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    min-height: unset;
+  }
+
+  /* Hide everything except the print report wrapper */
+  header, .top-panel, .empty-state, .method-note,
+  .btn, .add-row-btn, .tbl-footer, #emptyState {
+    display: none !important;
+  }
+
+  .main-area {
+    padding: 0 !important;
+    gap: 0 !important;
+    background: #fff !important;
+  }
+
+  #results { display: block !important; }
+  .hidden { display: block !important; }
+
+  /* Print report wrapper */
+  .print-report {
+    display: block !important;
+    background: #fff;
+    padding: 0;
+  }
+
+  .no-print { display: none !important; }
+
+  /* Print header */
+  .print-header {
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .print-header-left {}
+  .print-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .print-subtitle {
+    font-size: 10px;
+    color: #555;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .print-meta {
+    text-align: right;
+    font-size: 9.5px;
+    color: #555;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.7;
+  }
+
+  /* Card reset */
+  .combined-card {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .card-header {
+    border-bottom: 1px solid #ccc !important;
+    padding: 0 0 8px !important;
+    margin-bottom: 0;
+  }
+  .card-title { font-size: 13px !important; color: #000 !important; font-weight: 700 !important; }
+  .card-sub { font-size: 10px !important; color: #555 !important; }
+  .badge {
+    border: 1px solid #999 !important;
+    background: #f4f4f4 !important;
+    color: #000 !important;
+    font-size: 9px !important;
+  }
+
+  /* Params bar */
+  .params-bar { margin-bottom: 8px !important; gap: 4px !important; }
+  .param-chip {
+    background: #f4f4f4 !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+  .param-chip span { color: #000 !important; font-weight: 700 !important; }
+
+  /* Chart sections */
+  .chart-section {
+    border-bottom: 1px solid #e0e0e0 !important;
+    padding: 12px 0 !important;
+    page-break-inside: avoid;
+  }
+  .chart-section-label {
+    font-size: 10px !important;
+    color: #000 !important;
+    letter-spacing: 0.09em;
+    margin-bottom: 6px !important;
+  }
+  .chart-section-label::after { background: #ccc !important; }
+  .chart-section-label .r2 {
+    background: #f4f4f4 !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+    font-size: 9px !important;
+  }
+
+  .chart-wrap { height: 230px !important; }
+  .chart-wrap.prec { height: 170px !important; }
+
+  /* Precision legend */
+  .prec-legend {
+    font-size: 10px !important;
+    color: #333 !important;
+    margin-top: 6px !important;
+    gap: 10px !important;
+  }
+  .pl-dot { background: #555 !important; }
+
+  /* Limits section */
+  .limits-section { padding: 12px 0 16px !important; page-break-inside: avoid; }
+  .limits-title {
+    font-size: 10px !important;
+    color: #000 !important;
+    margin-bottom: 8px !important;
+  }
+  .limits-title::after { background: #ccc !important; }
+
+  .limits-row { gap: 6px !important; }
+  .lim-card {
+    border: 1px solid #bbb !important;
+    background: #f8f8f8 !important;
+    color: #000 !important;
+    padding: 8px 10px !important;
+    min-width: 90px !important;
+  }
+  .lim-acronym { color: #000 !important; font-size: 10px !important; }
+  .lim-val { color: #000 !important; font-size: 16px !important; }
+  .lim-unit { color: #444 !important; }
+  .lim-desc { color: #555 !important; }
+
+  /* Print footer note */
+  .print-footer-note {
+    display: block !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #666;
+    line-height: 1.7;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+  .method-note { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -557,6 +740,10 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
   <h1>Standard Curve &amp; Precision Profile</h1>
   <div class="header-right">
     <div class="model-badge-header" id="modelBadgeHeader"></div>
+    <button class="btn btn-print" id="printBtn" onclick="printReport()" title="Print report">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print Report
+    </button>
   </div>
 </header>
 
@@ -729,6 +916,15 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
   </div>
 
   <div id="results" class="hidden">
+    <!-- Print-only header (hidden on screen, shown in print) -->
+    <div class="print-header" style="display:none">
+      <div class="print-header-left">
+        <div class="print-title">LFA Performance Analysis Report</div>
+        <div class="print-subtitle" id="printSubtitle">Standard Curve · Precision Profile · Analytical Limits</div>
+      </div>
+      <div class="print-meta" id="printMeta"></div>
+    </div>
+
     <div class="combined-card">
       <div class="card-header">
         <div>
@@ -771,6 +967,9 @@ header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
       </div>
 
       <div class="method-note" id="methodNote"></div>
+
+      <!-- Print-only footer note -->
+      <div class="print-footer-note" id="printFooterNote" style="display:none"></div>
     </div>
   </div>
 </div>
@@ -953,6 +1152,7 @@ function clearAll() {
   document.getElementById('tblBody').innerHTML = '';
   document.getElementById('emptyState').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
+  document.getElementById('printBtn').classList.remove('visible');
   if (stdChartInst) { stdChartInst.destroy(); stdChartInst = null; }
   if (precChartInst) { precChartInst.destroy(); precChartInst = null; }
   document.getElementById('autoModelNote').classList.remove('show');
@@ -1462,6 +1662,7 @@ function analyze() {
 
   document.getElementById('emptyState').classList.add('hidden');
   document.getElementById('results').classList.remove('hidden');
+  document.getElementById('printBtn').classList.add('visible');
 }
 
 // ═══════════════════════════════════════
@@ -1522,6 +1723,86 @@ function processFile(file){
     }catch(err){alert('Error reading file: '+err.message);}
   };
   reader.readAsArrayBuffer(file);
+}
+
+// ═══════════════════════════════════════
+// PRINT REPORT
+// ═══════════════════════════════════════
+function printReport() {
+  // Populate print meta
+  const metricLabel = metric === 'signal' ? 'Signal (AU)' : 'T/C Ratio';
+  const modelLabel = document.getElementById('fitBadge').textContent;
+  const r2Label = document.getElementById('r2Badge').textContent;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  const timeStr = now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('printSubtitle').textContent =
+    `${metricLabel} · ${modelLabel} Fit · ${r2Label}`;
+  document.getElementById('printMeta').innerHTML =
+    `LFA·ANALYZER<br>Generated: ${dateStr} ${timeStr}<br>Method: CLSI EP17-A2`;
+
+  // Mirror method note to print footer
+  document.getElementById('printFooterNote').textContent =
+    document.getElementById('methodNote').textContent;
+
+  // Temporarily re-render charts in grayscale-friendly colors
+  const bwChart = (inst, datasetColors) => {
+    if (!inst) return;
+    inst.data.datasets.forEach((ds, i) => {
+      ds._origBorderColor = ds.borderColor;
+      ds._origBackgroundColor = ds.backgroundColor;
+      ds._origPointBorderColor = ds.pointBorderColor;
+      ds._origPointBackgroundColor = ds.pointBackgroundColor;
+      Object.assign(ds, datasetColors[i] || {});
+    });
+    inst.options._origGridColorX = inst.options.scales?.x?.grid?.color;
+    inst.options._origGridColorY = inst.options.scales?.y?.grid?.color;
+    if (inst.options.scales?.x?.grid) inst.options.scales.x.grid.color = '#ddd';
+    if (inst.options.scales?.y?.grid) {
+      const orig = inst.options.scales.y.grid.color;
+      inst.options.scales.y.grid.color = typeof orig === 'function'
+        ? ctx => '#ddd'
+        : '#ddd';
+    }
+    inst.update('none');
+  };
+
+  // Standard curve: dark line, grey points
+  bwChart(stdChartInst, [
+    { borderColor:'#111', backgroundColor:'rgba(0,0,0,0.04)',
+      pointBackgroundColor:'#222', pointBorderColor:'#000' }, // fitted line (if any)
+  ]);
+
+  // Precision profile
+  bwChart(precChartInst, [
+    { borderColor:'#333', backgroundColor:'rgba(0,0,0,0.04)',
+      pointBackgroundColor: precChartInst?.data?.datasets?.[0]?.pointBackgroundColor?.map?.(()=>'#555') || '#555',
+      pointBorderColor: precChartInst?.data?.datasets?.[0]?.pointBorderColor?.map?.(()=>'#333') || '#333' }
+  ]);
+
+  window.print();
+
+  // Restore after print dialog
+  const restore = () => {
+    [stdChartInst, precChartInst].forEach(inst => {
+      if (!inst) return;
+      inst.data.datasets.forEach(ds => {
+        if (ds._origBorderColor !== undefined) ds.borderColor = ds._origBorderColor;
+        if (ds._origBackgroundColor !== undefined) ds.backgroundColor = ds._origBackgroundColor;
+        if (ds._origPointBorderColor !== undefined) ds.pointBorderColor = ds._origPointBorderColor;
+        if (ds._origPointBackgroundColor !== undefined) ds.pointBackgroundColor = ds._origPointBackgroundColor;
+      });
+      if (inst.options.scales?.x?.grid && inst.options._origGridColorX !== undefined)
+        inst.options.scales.x.grid.color = inst.options._origGridColorX;
+      if (inst.options.scales?.y?.grid && inst.options._origGridColorY !== undefined)
+        inst.options.scales.y.grid.color = inst.options._origGridColorY;
+      inst.update('none');
+    });
+  };
+
+  // Use afterprint event for reliable restore
+  window.addEventListener('afterprint', restore, { once: true });
 }
 
 // ═══════════════════════════════════════
